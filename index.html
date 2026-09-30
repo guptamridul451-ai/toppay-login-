@@ -1,0 +1,78 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+  <title>Demo Login</title>
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+  <main class="app" aria-label="Demo login">
+    <section id="startupScreen" class="startup-screen" aria-label="Security verification demo">
+      <div class="verification-page">
+        <div class="verification-title">toppay-login.vercel.app</div>
+        <h2>Performing security verification</h2>
+        <p class="verification-copy">
+          This demo uses a security check to protect against automated requests.
+          This page is displayed while the demo verifies the session.
+        </p>
+        <div class="verification-status" id="verificationStatus" aria-live="polite">
+          <span class="startup-spinner" aria-hidden="true"></span>
+          <span>Verifying...</span>
+        </div>
+      </div>
+    </section>
+    <section id="loginScreen" class="screen login-screen">
+      <h1>LOG IN</h1>
+
+      <form id="loginForm" autocomplete="off" novalidate>
+        <label class="field">
+          <span class="icon phone-icon" aria-hidden="true">⌕</span>
+          <input
+            id="phone"
+            name="phone"
+            type="tel"
+            inputmode="tel"
+            placeholder="Enter Your Phone Number"
+            aria-label="Demo phone number"
+          >
+        </label>
+
+        <label class="field">
+          <span class="icon lock-icon" aria-hidden="true">▢</span>
+          <input
+            id="password"
+            name="password"
+            type="password"
+            placeholder="Enter Password"
+            aria-label="Demo password"
+          >
+        </label>
+
+        <label class="field">
+          <span class="icon lock-icon" aria-hidden="true">▢</span>
+          <input
+            id="mpin"
+            name="mpin"
+            type="password"
+            inputmode="numeric"
+            maxlength="6"
+            placeholder="Enter MPIN"
+            aria-label="Demo MPIN"
+          >
+        </label>
+
+        <p class="demo-note">DEMO — credentials are not saved or transmitted.</p>
+
+        <button class="login-button" id="loginButton" type="submit" disabled>LOG IN</button>
+      </form>
+    </section>
+
+    <section id="loadingScreen" class="screen loading-screen" hidden aria-live="polite">
+      <span class="spinner" aria-hidden="true"></span>
+    </section>
+  </main>
+
+  <script src="script.js"></script>
+</body>
+</html>
