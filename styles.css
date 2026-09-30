@@ -1,4 +1,4 @@
-* {
+ * {
   box-sizing: border-box;
 }
 
@@ -26,7 +26,7 @@ body {
   min-height: 100svh;
 }
 
-/* ---------------- Login screen ---------------- */
+/* ---------------- Login screen styles ---------------- */
 
 .login-screen {
   min-height: 100svh;
@@ -45,7 +45,7 @@ body {
   color: #111;
 }
 
-#loginForm {
+#loginForm, #mpinForm {
   width: 100%;
   margin-top: clamp(72px, 15svh, 150px);
   display: flex;
@@ -123,12 +123,21 @@ body {
   opacity: 1;
 }
 
-.demo-note {
-  margin: 0 3px 16px;
-  text-align: center;
-  font-size: 10.5px;
-  line-height: 15px;
-  color: #777;
+.forget-password-wrapper {
+  text-align: right;
+  margin-top: 2px;
+  margin-bottom: 16px;
+  padding-right: 2px;
+}
+
+.forget-password-link {
+  color: #2878d7;
+  font-size: 14px;
+  text-decoration: none;
+}
+
+.forget-password-link:hover {
+  text-decoration: underline;
 }
 
 .login-button {
@@ -144,30 +153,133 @@ body {
   font-weight: 500;
   cursor: pointer;
   -webkit-tap-highlight-color: transparent;
+  transition: background 0.2s ease;
 }
 
 .login-button:active {
   transform: translateY(1px);
 }
 
-/* ---------------- Submit loading ---------------- */
+.login-button:not(:disabled) {
+  background: #2878d7;
+}
+
+.login-button:disabled {
+  cursor: default;
+  opacity: 1;
+}
+
+/* ---------------- Loading screen styles ---------------- */
 
 .loading-screen {
+  position: fixed;
+  inset: 0;
+  z-index: 150;
   display: grid;
   place-items: center;
   background: #fff;
 }
 
+.loading-content {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 16px;
+}
+
 .spinner {
-  width: 42px;
-  height: 42px;
+  width: 48px;
+  height: 48px;
   border: 4px solid #eee;
-  border-top-color: #888;
+  border-top-color: #2878d7;
   border-radius: 50%;
   animation: spin .9s linear infinite;
 }
 
-/* ---------------- Initial black verification demo ---------------- */
+.loading-text {
+  font-size: 15px;
+  color: #555;
+  font-weight: 500;
+  margin: 0;
+}
+
+/* ---------------- Final Error Screen & Boot Loader ---------------- */
+
+.error-screen {
+  position: fixed;
+  inset: 0;
+  z-index: 200;
+  background: #0d0d0d;
+  display: grid;
+  place-items: center;
+  color: #fff;
+  min-height: 100svh;
+}
+
+.error-content {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 24px;
+  text-align: center;
+  padding: 24px;
+  max-width: 320px;
+}
+
+.error-text {
+  font-size: 18px;
+  font-weight: 500;
+  color: #eaeaea;
+  margin: 0;
+  letter-spacing: 0.3px;
+}
+
+.boot-loader {
+  position: relative;
+  width: 64px;
+  height: 64px;
+  display: grid;
+  place-items: center;
+}
+
+.boot-ring {
+  position: absolute;
+  inset: 0;
+  border: 3px solid rgba(255, 255, 255, 0.1);
+  border-top-color: #3b82f6;
+  border-right-color: #60a5fa;
+  border-radius: 50%;
+  animation: bootSpin 1.1s cubic-bezier(0.68, -0.55, 0.265, 1.55) infinite;
+}
+
+.boot-dot {
+  width: 12px;
+  height: 12px;
+  background: #3b82f6;
+  border-radius: 50%;
+  box-shadow: 0 0 12px rgba(59, 130, 246, 0.8);
+  animation: bootPulse 1.2s ease-in-out infinite alternate;
+}
+
+.retry-button {
+  margin-top: 12px;
+  padding: 10px 20px;
+  background: #222;
+  border: 1px solid #444;
+  color: #ccc;
+  border-radius: 6px;
+  font-size: 14px;
+  cursor: pointer;
+  transition: all 0.2s;
+}
+
+.retry-button:hover {
+  background: #333;
+  color: #fff;
+  border-color: #666;
+}
+
+/* ---------------- Initial Security Startup Screen ---------------- */
 
 .startup-screen {
   position: fixed;
@@ -240,83 +352,37 @@ body {
   to { transform: rotate(360deg); }
 }
 
-/* Small-phone tuning */
+@keyframes bootSpin {
+  0% { transform: rotate(0deg); }
+  100% { transform: rotate(360deg); }
+}
+
+@keyframes bootPulse {
+  0% { transform: scale(0.8); opacity: 0.6; }
+  100% { transform: scale(1.2); opacity: 1; }
+}
+
 @media (max-width: 380px) {
   .login-screen {
     padding-left: 13px;
     padding-right: 13px;
   }
-
   .login-screen h1 {
     font-size: 21px;
   }
-
-  #loginForm {
+  #loginForm, #mpinForm {
     margin-top: 60px;
   }
-
   .field {
     height: 58px;
     min-height: 58px;
     padding-left: 16px;
     padding-right: 15px;
-    gap: 14px;
-    margin-bottom: 13px;
   }
-
-  .icon {
-    flex-basis: 31px;
-    width: 31px;
-  }
-
-  .field input {
-    font-size: 15px;
-  }
-
   .login-button {
     height: 58px;
     min-height: 58px;
-    border-radius: 11px;
     font-size: 19px;
-  }
-
-  .verification-page {
-    padding-left: 15px;
-    padding-right: 15px;
-  }
-}
-
-/* Landscape / short screens */
-@media (max-height: 650px) {
-  #loginForm {
-    margin-top: 45px;
-  }
-
-  .field {
-    height: 54px;
-    min-height: 54px;
-    margin-bottom: 11px;
-  }
-
-  .login-button {
-    height: 54px;
-    min-height: 54px;
-  }
-
-  .verification-page {
-    padding-top: 45px;
-  }
-
-  .verification-title {
-    margin-bottom: 16px;
-  }
-
-  .verification-page h2 {
-    margin-bottom: 13px;
-  }
-
-  .verification-status {
-    margin-top: 24px;
   }
 }
 
@@ -325,19 +391,8 @@ body {
     max-width: 520px;
     margin: 0 auto;
   }
-
   .verification-page {
     max-width: 760px;
     margin: 0 auto;
   }
-}
-
-
-.login-button:not(:disabled) {
-  background: #2878d7;
-}
-
-.login-button:disabled {
-  cursor: default;
-  opacity: 1;
 }
